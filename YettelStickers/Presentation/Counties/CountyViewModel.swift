@@ -2,6 +2,7 @@ import SwiftUI
 
 protocol CountyViewModelProtocol: ObservableObject {
     var counties: [VignetteInformationCounty] { get }
+    func getCurrentOrder() -> [VignetteInformationCounty]
     func onAppear()
 }
 
@@ -30,5 +31,9 @@ final class CountyViewModel: CountyViewModelProtocol {
 
     func onAppear() {
         debugPrint("#7 COUNTIES: " + "\(counties)")
+    }
+
+    func getCurrentOrder() -> [VignetteInformationCounty] {
+       Array(selectedCounties)
     }
 }
