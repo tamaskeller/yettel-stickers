@@ -12,6 +12,13 @@ public final class DependencyInjector {
         return resolved
     }
 
+    public func resolve<T, Arg>(_ type: T.Type, argument: Arg) -> T {
+        guard let resolved = container.resolve(type, argument: argument) else {
+            fatalError("Failed to resolve type \(type)")
+        }
+        return resolved
+    }
+
     private init() {
         registerServices()
         registerRepositories()
@@ -31,11 +38,11 @@ public final class DependencyInjector {
     }
 
     private func registerViewModels() {
-        container.register(HomeViewModelProtocol.self) { [unowned self] _ in
+        container.register((any HomeViewModelProtocol).self) { [unowned self] _ in
             HomeViewModel(repository: resolve(HighwayRepositoryProtocol.self))
         }
-        container.register(CountyViewModelProtocol.self) { [unowned self] _ in
-            CountyViewModel(repository: resolve(HighwayRepositoryProtocol.self))
+        container.register((any CountyViewModelProtocol).self) { [unowned self] (_, counties: [VignetteInformationCounty]) in
+            CountyViewModel(counties: counties, repository: resolve(HighwayRepositoryProtocol.self))
         }
     }
 }

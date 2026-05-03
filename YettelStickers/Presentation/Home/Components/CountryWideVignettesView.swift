@@ -15,13 +15,15 @@ struct CountryWideVignettesListView: View {
                     let isSelected = selectedVignette?.vignetteType == vignettes[i].vignetteType
                     CountryWideTicketView(
                         title: vignettes[i].vignetteType.first ?? "",
-                        price: "\(Int(vignettes[i].sum)) Ft") {
-                            selectedVignette = vignettes[i]
-                    }.roundedCorners(
+                        price: "\(Int(vignettes[i].sum)) Ft")
+                    .roundedCorners(
                             radius: 8,
                             strokeColor: isSelected ?
                             Assets.Colors.primaryBlue ?? .clear :
                                 Assets.Colors.backgroundGrey ?? .clear)
+                    .onTapGesture {
+                        selectedVignette = vignettes[i]
+                    }
                 }
                 RoundedButton(content: {
                     Text("Vásárlás")

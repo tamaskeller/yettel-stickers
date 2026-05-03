@@ -1,21 +1,22 @@
 //
-//  CountryWideTicketView.swift
+//  CountyListTileView.swift
 //  YettelStickers
 //
-//  Created by Tamás Keller on 2026. 04. 29..
+//  Created by Tamás Keller on 2026. 05. 03..
 //
-
 
 import SwiftUI
 
-struct CountryWideTicketView: View {
+struct CountyListTileView: View {
 
     private let title: String
     private let price: String
+    private let isSelected: Bool
 
-    init(title: String, price: String) {
+    init(title: String, price: String, isSelected: Bool = false) {
         self.title = title
         self.price = price
+        self.isSelected = isSelected
     }
 
     var body: some View {
@@ -27,11 +28,7 @@ struct CountryWideTicketView: View {
                 .foregroundColor(Assets.Colors.primaryBlue)
         }
         .padding()
+        .background(isSelected ? Color.yellow : Color.clear)
         .contentShape(Rectangle())
     }
-}
-
-#Preview {
-    CountryWideTicketView(title: "ITT KELL VENNI", price: "Some price")
-        .padding()
 }

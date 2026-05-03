@@ -21,7 +21,7 @@ struct VehicleCardView: View {
             HStack {
                 Assets.Images.iconCar.padding(.trailing, 8)
                 VStack(alignment: .leading) {
-                    Text("\(licensePlateNumber)")
+                    Text("\(licensePlateNumber.uppercased())")
                         .font(.caption)
                         .foregroundColor(Assets.Colors.primaryBlue)
                     Text("\(ownerName)")

@@ -2,16 +2,37 @@ import SwiftUI
 
 struct CountyView: View {
 
-    let viewModel: CountyViewModelProtocol
+    @StateObject var viewModel: CountyViewModel
 
     var body: some View {
+        content
+    }
+
+    private var content: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Counties come here!")
+            ScrollView() {
+                Text("Éves vármegyei matricák")
+                VStack {
+                    Assets.Images.countyGroupPreset.renderingMode(.original)
+                    ForEach(viewModel.counties, id: \.self) { county in
+                        let isSelected = viewModel.selectedCounties.contains(county)
+                        CountyListTileView(title: county.name, price: "666", isSelected: isSelected)
+                            .onTapGesture {
+                                viewModel.toggle(county)
+                            }
+                    }
+                }
+            }
+
+            RoundedButton(content: {
+                Text("Vásárlás")
+            }) {
+                print("MEGVESZEM")
+            }
         }
         .padding()
+        .frame(alignment: .leading)
+        .frame(maxWidth: .infinity)
         .onAppear {
             viewModel.onAppear()
         }

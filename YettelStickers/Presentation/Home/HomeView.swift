@@ -1,26 +1,19 @@
 import SwiftUI
 
 struct HomeView: View {
-
-    @State private var path = NavigationPath()
-
     @StateObject var viewModel: HomeViewModel
+    @EnvironmentObject var coordinator: AppCoordinator
 
     var body: some View {
-        NavigationStack(path: $path) {
-            ZStack {
-                Assets.Colors.backgroundGrey
-                    .edgesIgnoringSafeArea(.all)
+        ZStack {
+            Assets.Colors.backgroundGrey
+                .edgesIgnoringSafeArea(.all)
+            ScrollView {
                 contentView
             }
-            .onAppear {
-                viewModel.onAppear()
-            }
-            .navigationDestination(for: String.self) { value in
-                if value == "counties" {
-                    CountyView(viewModel: DependencyInjector.shared.resolve(CountyViewModelProtocol.self))
-                }
-            }
+        }
+        .onAppear {
+            viewModel.onAppear()
         }
     }
 
@@ -37,12 +30,12 @@ struct HomeView: View {
                         $0.vignetteType.count == 1
                     },
                     purchaseAction: {
-                        path.append("counties")
+                        coordinator.goToCounties(counties: vignettes.payload.counties)
                     },
                     selectedVignette: $viewModel.selectedVignette)
-            }
-            CountyVignettesMenuView {
-                path.append("counties")
+                CountyVignettesMenuView {
+                    coordinator.goToCounties(counties: vignettes.payload.counties)
+                }
             }
         }.padding(.horizontal)
     }
