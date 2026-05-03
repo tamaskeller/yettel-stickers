@@ -44,6 +44,9 @@ public final class DependencyInjector {
         container.register((any CountyViewModelProtocol).self) { [unowned self] (_, counties: [VignetteInformationCounty]) in
             CountyViewModel(counties: counties, repository: resolve(HighwayRepositoryProtocol.self))
         }
+        container.register((any ConfirmationViewModelProtocol).self) { (_) in
+            ConfirmationViewModel()
+        }
     }
 }
 

@@ -20,7 +20,14 @@ struct YettelStickersApp: App {
                             HomeView(viewModel: DependencyInjector.shared.resolve((any HomeViewModelProtocol).self) as! HomeViewModel)
                         case .counties(let counties):
                             CountyView(
-                              viewModel: DependencyInjector.shared.resolve((any CountyViewModelProtocol).self, argument: counties) as! CountyViewModel)
+                              viewModel:
+                                DependencyInjector.shared.resolve((any CountyViewModelProtocol).self, argument: counties) as! CountyViewModel)
+                                .environmentObject(coordinator)
+                        case .confirmation(let preorder):
+                            ConfirmationView(
+                                viewModel:
+                                    DependencyInjector.shared.resolve(ConfirmationViewModel.self))
+                                .environmentObject(coordinator)
                         }
                     }
             }

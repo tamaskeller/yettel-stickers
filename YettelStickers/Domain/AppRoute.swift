@@ -5,7 +5,8 @@
 //  Created by Tamás Keller on 2026. 05. 03..
 //
 
-enum AppRoute: Hashable {
+enum AppRoute: Codable, Hashable {
     case home
     case counties([VignetteInformationCounty])
+    case confirmation(HighwayTicketPreorder)
 }

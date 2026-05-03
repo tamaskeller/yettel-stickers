@@ -3,6 +3,7 @@ import SwiftUI
 struct CountyView: View {
 
     @StateObject var viewModel: CountyViewModel
+    @EnvironmentObject var coordinator: AppCoordinator
 
     var body: some View {
         content
@@ -27,7 +28,7 @@ struct CountyView: View {
             RoundedButton(content: {
                 Text("Vásárlás")
             }) {
-                print("MEGVESZEM")
+                coordinator.reset()
             }
         }
         .padding()
