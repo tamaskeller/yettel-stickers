@@ -28,7 +28,7 @@ struct CountyView: View {
             RoundedButton(content: {
                 Text("Vásárlás")
             }) {
-                coordinator.reset()
+                coordinator.pushConfirmation(perorders: [])
             }
         }
         .padding()

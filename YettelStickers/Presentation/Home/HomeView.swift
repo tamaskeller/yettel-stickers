@@ -30,11 +30,11 @@ struct HomeView: View {
                         $0.vignetteType.count == 1
                     },
                     purchaseAction: {
-                        coordinator.goToCounties(counties: vignettes.payload.counties)
+                        coordinator.pushCounties(counties: vignettes.payload.counties)
                     },
                     selectedVignette: $viewModel.selectedVignette)
                 CountyVignettesMenuView {
-                    coordinator.goToCounties(counties: vignettes.payload.counties)
+                    coordinator.pushCounties(counties: vignettes.payload.counties)
                 }
             }
         }.padding(.horizontal)

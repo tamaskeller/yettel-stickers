@@ -8,5 +8,5 @@
 enum AppRoute: Codable, Hashable {
     case home
     case counties([VignetteInformationCounty])
-    case confirmation(HighwayTicketPreorder)
+    case confirmation([HighwayTicketPreorder])
 }

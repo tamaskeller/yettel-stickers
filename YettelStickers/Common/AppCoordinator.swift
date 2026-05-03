@@ -11,8 +11,12 @@ import SwiftUI
 class AppCoordinator: ObservableObject {
     @Published var path = NavigationPath()
 
-    func goToCounties(counties: [VignetteInformationCounty]) {
+    func pushCounties(counties: [VignetteInformationCounty]) {
         path.append(AppRoute.counties(counties))
+    }
+
+    func pushConfirmation(perorders: [HighwayTicketPreorder]) {
+        path.append(AppRoute.confirmation(perorders))
     }
 
     func goBack() {

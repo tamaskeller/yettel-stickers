@@ -10,11 +10,9 @@ final class CountyViewModel: CountyViewModelProtocol {
 
     @Published var counties: [VignetteInformationCounty]
     @Published var selectedCounties: Set<VignetteInformationCounty> = []
-    let repository: HighwayRepositoryProtocol
 
     init(counties: [VignetteInformationCounty], repository: HighwayRepositoryProtocol) {
         self.counties = counties
-        self.repository = repository
     }
 
     func toggle(_ item: VignetteInformationCounty) {

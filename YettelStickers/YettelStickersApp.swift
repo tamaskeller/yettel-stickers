@@ -23,10 +23,10 @@ struct YettelStickersApp: App {
                               viewModel:
                                 DependencyInjector.shared.resolve((any CountyViewModelProtocol).self, argument: counties) as! CountyViewModel)
                                 .environmentObject(coordinator)
-                        case .confirmation(let preorder):
+                        case .confirmation(let preorders):
                             ConfirmationView(
                                 viewModel:
-                                    DependencyInjector.shared.resolve(ConfirmationViewModel.self))
+                                    DependencyInjector.shared.resolve((any ConfirmationViewModelProtocol).self, argument: preorders) as! ConfirmationViewModel)
                                 .environmentObject(coordinator)
                         }
                     }

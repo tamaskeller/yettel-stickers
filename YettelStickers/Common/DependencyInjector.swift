@@ -39,13 +39,18 @@ public final class DependencyInjector {
 
     private func registerViewModels() {
         container.register((any HomeViewModelProtocol).self) { [unowned self] _ in
-            HomeViewModel(repository: resolve(HighwayRepositoryProtocol.self))
+            HomeViewModel(
+                repository: resolve(HighwayRepositoryProtocol.self))
         }
         container.register((any CountyViewModelProtocol).self) { [unowned self] (_, counties: [VignetteInformationCounty]) in
-            CountyViewModel(counties: counties, repository: resolve(HighwayRepositoryProtocol.self))
+            CountyViewModel(
+                counties: counties,
+                repository: resolve(HighwayRepositoryProtocol.self))
         }
-        container.register((any ConfirmationViewModelProtocol).self) { (_) in
-            ConfirmationViewModel()
+        container.register((any ConfirmationViewModelProtocol).self) { [unowned self] (_, preorder: [HighwayTicketPreorder]) in
+            ConfirmationViewModel(
+                preorderData: preorder,
+                repository: resolve(HighwayRepositoryProtocol.self))
         }
     }
 }
