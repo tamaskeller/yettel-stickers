@@ -12,3 +12,15 @@
 5. HTTP in itself is prohibited by iOS, so make sure to enable it in Project Settings.
     1. Go to Project Settings, set NSAllowsArbitraryLoads to YES in Info.plist
 6. Enjoy
+
+## TO-DO
+
+1. The flow in currently incomplete, needs finishing (currently in progress).
+2. Among others, error/loading handling needs to be done.
+3. Unit tests.
+4. The harder tasks (county indication on the map, and neighbourhood alert) need implementing.
+5. Folder cleanup so everything is in the right place.
+6. Constants (especially dimensional) need to be in their respective enums and/or utility classes.
+7. Strings should be localized and provided by a utility class.
+8. Alamofire was chosen as a lib to quicken work, own custom implementation would be preferred.
+9. The design has much room for improvement from the development side.
