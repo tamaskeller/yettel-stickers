@@ -18,9 +18,8 @@ struct RoundedCardView<Content: View>: View {
         content
             .padding()
             .background(Color.white)
-            .cornerRadius(8)
+            .roundedCorners(radius: 8)
             .frame(maxWidth: .infinity)
-            .shadow(radius: 4)
     }
 }
 

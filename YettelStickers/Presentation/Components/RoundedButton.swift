@@ -26,7 +26,7 @@ struct RoundedButton<Content: View>: View {
         .foregroundStyle(.white)
         .frame(height: 48)
         .frame(maxWidth: .infinity)
-        .background(Styles.Colors.primaryBlue)
+        .background(Assets.Colors.primaryBlue)
         .cornerRadius(24)
     }
 }

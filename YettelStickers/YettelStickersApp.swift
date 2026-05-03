@@ -9,7 +9,7 @@ struct YettelStickersApp: App {
 
     var body: some Scene {
         WindowGroup {
-            HomeView(viewModel: DependencyInjector.shared.resolve(HomeViewModelProtocol.self))
+            HomeView(viewModel: DependencyInjector.shared.resolve((any HomeViewModelProtocol).self) as! HomeViewModel)
         }
     }
 

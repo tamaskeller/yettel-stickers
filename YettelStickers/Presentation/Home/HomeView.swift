@@ -4,12 +4,12 @@ struct HomeView: View {
 
     @State private var path = NavigationPath()
 
-    let viewModel: HomeViewModelProtocol
+    @StateObject var viewModel: HomeViewModel
 
     var body: some View {
         NavigationStack(path: $path) {
             ZStack {
-                Styles.Colors.backgroundGrey
+                Assets.Colors.backgroundGrey
                     .edgesIgnoringSafeArea(.all)
                 contentView
             }
@@ -25,23 +25,31 @@ struct HomeView: View {
     }
 
     private var contentView: some View {
-        ScrollView {
-            VStack() {
-                VehicleCardView(licensePlateNumber: "OOF", ownerName: "669")
-                CountryWideVignettesListView(purchaseAction: {
-                    path.append("counties")
-                })
-                CountyVignettesMenuView {
-                    path.append("counties")
-                }
+        VStack {
+            if
+                let plateNumber = viewModel.vehicleInformation?.plate,
+                let ownerName = viewModel.vehicleInformation?.name {
+                VehicleCardView(licensePlateNumber: plateNumber, ownerName: ownerName)
             }
-            .frame(maxWidth: .infinity)
-                    .padding()
-            .background(Color.yellow)
-        }
+            if let vignettes = viewModel.vignetteInformation {
+                CountryWideVignettesListView(
+                    vignettes: vignettes.payload.highwayVignettes.filter {
+                        $0.vignetteType.count == 1
+                    },
+                    purchaseAction: {
+                        path.append("counties")
+                    },
+                    selectedVignette: $viewModel.selectedVignette)
+            }
+            CountyVignettesMenuView {
+                path.append("counties")
+            }
+        }.padding(.horizontal)
     }
 }
 
 #Preview {
-    HomeView(viewModel: HomeViewModel(repository: HighwayRepository(networkService: HighwayNetworkService())))
+    HomeView(
+        viewModel: HomeViewModel(
+            repository: DependencyInjector.shared.resolve(HighwayRepositoryProtocol.self)))
 }

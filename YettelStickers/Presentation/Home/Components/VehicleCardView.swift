@@ -19,14 +19,14 @@ struct VehicleCardView: View {
     var body: some View {
         RoundedCardView {
             HStack {
-                Image(systemName: "globe")
+                Assets.Images.iconCar.padding(.trailing, 8)
                 VStack(alignment: .leading) {
                     Text("\(licensePlateNumber)")
                         .font(.caption)
-                        .foregroundColor(.secondary)
+                        .foregroundColor(Assets.Colors.primaryBlue)
                     Text("\(ownerName)")
                         .font(.caption)
-                        .foregroundColor(.secondary)
+                        .foregroundColor(Assets.Colors.primaryBlue)
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
