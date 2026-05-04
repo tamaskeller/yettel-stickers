@@ -1,17 +1,21 @@
 import SwiftUI
 
 protocol ConfirmationViewModelProtocol: ObservableObject {
-
-    var preorderData: [HighwayTicketPreorder] { get }
+    var vignetteInformation: VignetteInformationResponse { get }
+    var selectionIdenfitiers: Set<String> { get }
 }
 
 final class ConfirmationViewModel: ConfirmationViewModelProtocol {
 
-    @Published var preorderData: [HighwayTicketPreorder]
+    @Published var selectionIdenfitiers: Set<String>
+    @Published var vignetteInformation: VignetteInformationResponse
     let repository: HighwayRepositoryProtocol
 
-    init(preorderData: [HighwayTicketPreorder], repository: HighwayRepositoryProtocol) {
-        self.preorderData = preorderData
-        self.repository = repository
+    init(selectionIdentifiers: Set<String>,
+         vignetteInformation: VignetteInformationResponse,
+         repository: HighwayRepositoryProtocol) {
+        self.vignetteInformation = vignetteInformation
+            self.repository = repository
+            self.selectionIdenfitiers = selectionIdentifiers
     }
 }

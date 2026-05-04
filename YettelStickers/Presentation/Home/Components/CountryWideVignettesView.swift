@@ -10,7 +10,7 @@ struct CountryWideVignettesListView: View {
     var body: some View {
         RoundedCardView {
             VStack(alignment: .leading) {
-                Text("Országos matricák")
+                //Text("Országos matricák")
                 ForEach(0..<vignettes.count, id: \.self) { i in
                     let isSelected = selectedVignette?.vignetteType == vignettes[i].vignetteType
                     CountryWideTicketView(

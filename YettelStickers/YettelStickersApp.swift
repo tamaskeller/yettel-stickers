@@ -18,15 +18,15 @@ struct YettelStickersApp: App {
                         switch route {
                         case .home:
                             HomeView(viewModel: DependencyInjector.shared.resolve((any HomeViewModelProtocol).self) as! HomeViewModel)
-                        case .counties(let counties):
-                            CountyView(
-                              viewModel:
-                                DependencyInjector.shared.resolve((any CountyViewModelProtocol).self, argument: counties) as! CountyViewModel)
                                 .environmentObject(coordinator)
-                        case .confirmation(let preorders):
+                        case .counties(let vignetteInfo):
+                            let viewModel = DependencyInjector.shared.resolve((any CountyViewModelProtocol).self, vignetteInfo) as! CountyViewModel
+                            CountyView(viewModel: viewModel)
+                                .environmentObject(coordinator)
+                        case .confirmation(let selectionInfo, let vignetteInfo):
                             ConfirmationView(
                                 viewModel:
-                                    DependencyInjector.shared.resolve((any ConfirmationViewModelProtocol).self, argument: preorders) as! ConfirmationViewModel)
+                                    DependencyInjector.shared.resolve((any ConfirmationViewModelProtocol).self, selectionInfo, vignetteInfo) as! ConfirmationViewModel)
                                 .environmentObject(coordinator)
                         }
                     }

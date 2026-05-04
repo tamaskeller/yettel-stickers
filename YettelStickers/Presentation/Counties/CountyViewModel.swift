@@ -1,18 +1,18 @@
 import SwiftUI
 
 protocol CountyViewModelProtocol: ObservableObject {
-    var counties: [VignetteInformationCounty] { get }
-    func getCurrentOrder() -> [VignetteInformationCounty]
-    func onAppear()
+    var currentState: VignetteInformationResponse { get }
+    func getCountyVignettePrice(for county: VignetteInformationCounty) -> Float
+    func getCurrentOrder() -> Set<String>
 }
 
 final class CountyViewModel: CountyViewModelProtocol {
 
-    @Published var counties: [VignetteInformationCounty]
+    @Published var currentState: VignetteInformationResponse
     @Published var selectedCounties: Set<VignetteInformationCounty> = []
 
-    init(counties: [VignetteInformationCounty], repository: HighwayRepositoryProtocol) {
-        self.counties = counties
+    init(currentState: VignetteInformationResponse, repository: HighwayRepositoryProtocol) {
+        self.currentState = currentState
     }
 
     func toggle(_ item: VignetteInformationCounty) {
@@ -27,11 +27,14 @@ final class CountyViewModel: CountyViewModelProtocol {
         selectedCounties.contains(item)
     }
 
-    func onAppear() {
-        debugPrint("#7 COUNTIES: " + "\(counties)")
+    func getCountyVignettePrice(for county: VignetteInformationCounty) -> Float {
+        let vignetteType = currentState.payload.highwayVignettes.first(where: {
+            $0.vignetteType.contains(county.id)
+        })
+        return vignetteType?.sum ?? 0
     }
 
-    func getCurrentOrder() -> [VignetteInformationCounty] {
-       Array(selectedCounties)
+    func getCurrentOrder() -> Set<String> {
+        Set(selectedCounties.map({ $0.id }))
     }
 }

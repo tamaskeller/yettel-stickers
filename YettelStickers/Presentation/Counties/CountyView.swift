@@ -15,9 +15,11 @@ struct CountyView: View {
                 Text("Éves vármegyei matricák")
                 VStack {
                     Assets.Images.countyGroupPreset.renderingMode(.original)
-                    ForEach(viewModel.counties, id: \.self) { county in
+                    let counties = viewModel.currentState.payload.counties
+                    ForEach(counties, id: \.self) { county in
                         let isSelected = viewModel.selectedCounties.contains(county)
-                        CountyListTileView(title: county.name, price: "666", isSelected: isSelected)
+                        let price = viewModel.getCountyVignettePrice(for: county)
+                        CountyListTileView(title: county.name, price: "\(Int(price)) Ft", isSelected: isSelected)
                             .onTapGesture {
                                 viewModel.toggle(county)
                             }
@@ -28,14 +30,13 @@ struct CountyView: View {
             RoundedButton(content: {
                 Text("Vásárlás")
             }) {
-                coordinator.pushConfirmation(perorders: [])
+                coordinator.pushConfirmation(
+                    selection: viewModel.getCurrentOrder(),
+                    response: viewModel.currentState)
             }
         }
         .padding()
         .frame(alignment: .leading)
         .frame(maxWidth: .infinity)
-        .onAppear {
-            viewModel.onAppear()
-        }
     }
 }

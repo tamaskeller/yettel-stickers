@@ -21,14 +21,16 @@ struct CountyListTileView: View {
 
     var body: some View {
         HStack{
+            let image = isSelected ? Assets.Images.checkboxFilled : Assets.Images.checkboxEmpty
+            image
+                .padding(.trailing, 12)
             Text(title)
-                .foregroundColor(Assets.Colors.primaryBlue)
+                .foregroundColor(isSelected ? Assets.Colors.textGrey : Assets.Colors.primaryBlue)
             Spacer()
             Text(price)
                 .foregroundColor(Assets.Colors.primaryBlue)
         }
         .padding()
-        .background(isSelected ? Color.yellow : Color.clear)
         .contentShape(Rectangle())
     }
 }
