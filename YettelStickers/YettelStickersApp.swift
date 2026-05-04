@@ -38,13 +38,13 @@ struct YettelStickersApp: App {
     private func customizeAppearance() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor(Assets.Colors.lime ?? .green)
+        appearance.backgroundColor = UIColor(.Yettel.lime)
 
         appearance.titleTextAttributes = [
-            .foregroundColor: UIColor(Assets.Colors.primaryBlue ?? .blue)
+            .foregroundColor: UIColor(.Yettel.primaryBlue)
         ]
         appearance.largeTitleTextAttributes = [
-            .foregroundColor: UIColor(Assets.Colors.primaryBlue ?? .blue)
+            .foregroundColor: UIColor(.Yettel.primaryBlue)
         ]
 
         let navBar = UINavigationBar.appearance()

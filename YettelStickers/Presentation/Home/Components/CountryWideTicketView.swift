@@ -21,10 +21,10 @@ struct CountryWideTicketView: View {
     var body: some View {
         HStack{
             Text(title)
-                .foregroundColor(Assets.Colors.primaryBlue)
+                .foregroundColor(.Yettel.primaryBlue)
             Spacer()
             Text(price)
-                .foregroundColor(Assets.Colors.primaryBlue)
+                .foregroundColor(.Yettel.primaryBlue)
         }
         .padding()
         .contentShape(Rectangle())

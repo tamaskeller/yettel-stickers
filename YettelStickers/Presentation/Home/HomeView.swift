@@ -6,7 +6,7 @@ struct HomeView: View {
 
     var body: some View {
         ZStack {
-            Assets.Colors.backgroundGrey
+            Color.Yettel.backgroundGrey
                 .edgesIgnoringSafeArea(.all)
             ScrollView {
                 contentView

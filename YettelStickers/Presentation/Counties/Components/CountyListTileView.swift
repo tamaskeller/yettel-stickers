@@ -25,10 +25,10 @@ struct CountyListTileView: View {
             image
                 .padding(.trailing, 12)
             Text(title)
-                .foregroundColor(isSelected ? Assets.Colors.textGrey : Assets.Colors.primaryBlue)
+                .foregroundColor(isSelected ? .Yettel.textGrey : .Yettel.primaryBlue)
             Spacer()
             Text(price)
-                .foregroundColor(Assets.Colors.primaryBlue)
+                .foregroundColor(.Yettel.primaryBlue)
         }
         .padding()
         .frame(height: 24)

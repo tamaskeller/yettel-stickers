@@ -23,10 +23,10 @@ struct VehicleCardView: View {
                 VStack(alignment: .leading) {
                     Text("\(licensePlateNumber.uppercased())")
                         .font(.caption)
-                        .foregroundColor(Assets.Colors.primaryBlue)
+                        .foregroundColor(.Yettel.primaryBlue)
                     Text("\(ownerName)")
                         .font(.caption)
-                        .foregroundColor(Assets.Colors.primaryBlue)
+                        .foregroundColor(.Yettel.primaryBlue)
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)

@@ -18,7 +18,7 @@ struct CountyVignettesMenuView: View {
             RoundedCardView {
                 HStack {
                     Text("Matricák")
-                        .foregroundColor(Assets.Colors.primaryBlue)
+                        .foregroundColor(.Yettel.primaryBlue)
                     Spacer()
                     Assets.Images.chevronRight
                 }
