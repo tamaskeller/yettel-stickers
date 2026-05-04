@@ -18,7 +18,8 @@
 1. The flow in currently incomplete, needs finishing (currently in progress).
 2. Among others, error/loading handling needs to be done.
 3. Unit tests.
-4. The harder tasks (county indication on the map, and neighbourhood alert) need implementing.
+4. One of the harder tasks (county non-neighbourhood alert) need implementing. 
+    NOTE: I'd like to solve it with a graph or a neighbourhood-matrix.
 5. Folder cleanup so everything is in the right place.
 6. Constants (especially dimensional) need to be in their respective enums and/or utility classes.
 7. Strings should be localized and provided by a utility class.
