@@ -29,8 +29,8 @@ public final class DependencyInjector {
             HomeViewModel(repository: resolve(HighwayRepositoryProtocol.self))
         }
         container.register((any CountyViewModelProtocol).self) {
-            [unowned self] (_, currentState) in
-            CountyViewModel(currentState: currentState,
+            [unowned self] (_, presentationData) in
+            CountyViewModel(presentationData: presentationData,
                             repository: resolve(HighwayRepositoryProtocol.self))
         }
         container.register((any ConfirmationViewModelProtocol).self) {

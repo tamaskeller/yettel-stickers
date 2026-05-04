@@ -8,4 +8,3 @@ public struct VignetteInformationHighwayVignette: Codable, Hashable {
     public var trxFee: Float
     public var sum: Float
 }
-

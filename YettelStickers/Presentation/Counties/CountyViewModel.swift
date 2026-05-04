@@ -1,21 +1,21 @@
 import SwiftUI
 
 protocol CountyViewModelProtocol: ObservableObject {
-    var currentState: VignetteInformationResponse { get }
-    func getCountyVignettePrice(for county: VignetteInformationCounty) -> Float
+    var presentationData: VignettePresentationData { get }
+    func getCountyVignettePrice(for county: VignettePresentationCountyData) -> Float
     func getCurrentOrder() -> Set<String>
 }
 
 final class CountyViewModel: CountyViewModelProtocol {
 
-    @Published var currentState: VignetteInformationResponse
-    @Published var selectedCounties: Set<VignetteInformationCounty> = []
+    @Published var presentationData: VignettePresentationData
+    @Published var selectedCounties: Set<VignettePresentationCountyData> = []
 
-    init(currentState: VignetteInformationResponse, repository: HighwayRepositoryProtocol) {
-        self.currentState = currentState
+    init(presentationData: VignettePresentationData, repository: HighwayRepositoryProtocol) {
+        self.presentationData = presentationData
     }
 
-    func toggle(_ item: VignetteInformationCounty) {
+    func toggle(_ item: VignettePresentationCountyData) {
         if selectedCounties.contains(item) {
             selectedCounties.remove(item)
         } else {
@@ -23,15 +23,12 @@ final class CountyViewModel: CountyViewModelProtocol {
         }
     }
 
-    func isSelected(_ item: VignetteInformationCounty) -> Bool {
+    func isSelected(_ item: VignettePresentationCountyData) -> Bool {
         selectedCounties.contains(item)
     }
 
-    func getCountyVignettePrice(for county: VignetteInformationCounty) -> Float {
-        let vignetteType = currentState.payload.highwayVignettes.first(where: {
-            $0.vignetteType.contains(county.id)
-        })
-        return vignetteType?.sum ?? 0
+    func getCountyVignettePrice(for county: VignettePresentationCountyData) -> Float {
+        presentationData.vignetteData[county.id]?.sum ?? 0
     }
 
     func getCurrentOrder() -> Set<String> {

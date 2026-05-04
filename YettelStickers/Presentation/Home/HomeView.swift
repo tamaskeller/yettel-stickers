@@ -18,28 +18,30 @@ struct HomeView: View {
         .navigationTitle("STICKERS!")
     }
 
+    @ViewBuilder
     private var contentView: some View {
-        VStack {
-            if
-                let plateNumber = viewModel.vehicleInformation?.plate,
-                let ownerName = viewModel.vehicleInformation?.name {
+        if let presentationData = viewModel.presentationData {
+            VStack {
+                let plateNumber = presentationData.vehicleData.vehiclePlateNumber
+                let ownerName = presentationData.vehicleData.vehicleOwnerName
                 VehicleCardView(licensePlateNumber: plateNumber, ownerName: ownerName)
-            }
-            if let vignettes = viewModel.vignetteInformation {
-                CountryWideVignettesListView(
-                    vignettes: vignettes.payload.highwayVignettes.filter {
-                        $0.vignetteType.count == 1
-                    },
-                    purchaseAction: {
-                        coordinator.pushCounties(vignetteInfo: vignettes)
-                    },
-                    selectedVignette: $viewModel.selectedVignette)
-                CountyVignettesMenuView {
-                    coordinator.pushCounties(vignetteInfo: vignettes)
+
+                if let vignettes = viewModel.presentationData?.vignetteData {
+                    CountryWideVignettesListView(
+                        vignettes: vignettes.values.filter {
+                            $0.isSingular
+                        },
+                        purchaseAction: {
+                            coordinator.pushCounties(vignetteInfo: presentationData)
+                        },
+                        selectedVignette: $viewModel.selectedVignette)
+                    CountyVignettesMenuView {
+                        coordinator.pushCounties(vignetteInfo: presentationData)
+                    }
                 }
             }
+            .padding(.horizontal)
         }
-        .padding(.horizontal)
     }
 }
 

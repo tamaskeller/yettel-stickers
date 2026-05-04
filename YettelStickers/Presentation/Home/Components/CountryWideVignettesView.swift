@@ -2,10 +2,10 @@ import SwiftUI
 
 struct CountryWideVignettesListView: View {
 
-    let vignettes: [VignetteInformationHighwayVignette]
+    let vignettes: [VignettePresentationVignetteData]
     let purchaseAction: () -> Void
 
-    @Binding var selectedVignette: VignetteInformationHighwayVignette?
+    @Binding var selectedVignette: VignettePresentationVignetteData?
 
     var body: some View {
         RoundedCardView {
@@ -24,10 +24,10 @@ struct CountryWideVignettesListView: View {
         }
     }
 
-    private func vignetteView(for vignette: VignetteInformationHighwayVignette) -> some View {
+    private func vignetteView(for vignette: VignettePresentationVignetteData) -> some View {
         let isSelected = selectedVignette?.vignetteType == vignette.vignetteType
         return CountryWideTicketView(
-            title: vignette.vignetteType.first ?? "",
+            title: vignette.vignetteType,
             price: "\(Int(vignette.sum)) Ft")
         .roundedCorners(
             radius: 8,

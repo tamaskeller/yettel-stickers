@@ -15,7 +15,7 @@ struct CountyView: View {
                 Text("Éves vármegyei matricák")
                 VStack(spacing: 16) {
                     Assets.Images.countyGroupPreset.renderingMode(.original)
-                    let counties = viewModel.currentState.payload.counties
+                    let counties = viewModel.presentationData.counties
                     ForEach(counties, id: \.self) { county in
                         let isSelected = viewModel.selectedCounties.contains(county)
                         let price = viewModel.getCountyVignettePrice(for: county)
@@ -33,7 +33,7 @@ struct CountyView: View {
             }) {
                 coordinator.pushConfirmation(
                     selection: viewModel.getCurrentOrder(),
-                    response: viewModel.currentState)
+                    response: viewModel.presentationData)
             }
             .opacity(viewModel.selectedCounties.isEmpty ? 0.5 : 1)
             .disabled(viewModel.selectedCounties.isEmpty)
