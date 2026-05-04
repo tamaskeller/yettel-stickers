@@ -1,10 +1,3 @@
-//
-//  CountyVignettesMenuView.swift
-//  YettelStickers
-//
-//  Created by Tamás Keller on 2026. 04. 29..
-//
-
 import SwiftUI
 
 struct CountyVignettesMenuView: View {
@@ -18,7 +11,7 @@ struct CountyVignettesMenuView: View {
             RoundedCardView {
                 HStack {
                     Text("Matricák")
-                        .foregroundColor(Assets.Colors.primaryBlue)
+                        .foregroundColor(.Yettel.primaryBlue)
                     Spacer()
                     Assets.Images.chevronRight
                 }

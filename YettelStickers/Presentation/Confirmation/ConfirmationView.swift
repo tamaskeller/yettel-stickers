@@ -11,7 +11,7 @@ struct ConfirmationView: View {
     private var content: some View {
         VStack {
             ScrollView() {
-                Text("MEGERŐSÍTÉS")
+                Text("Vásárlás megerősítése")
                 VStack {
                     Assets.Images.countyGroupPreset.renderingMode(.original)
 //                    ForEach(viewModel.counties, id: \.self) { county in

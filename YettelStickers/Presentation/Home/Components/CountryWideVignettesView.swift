@@ -10,32 +10,37 @@ struct CountryWideVignettesListView: View {
     var body: some View {
         RoundedCardView {
             VStack(alignment: .leading) {
-                //Text("Országos matricák")
                 ForEach(0..<vignettes.count, id: \.self) { i in
-                    let isSelected = selectedVignette?.vignetteType == vignettes[i].vignetteType
-                    CountryWideTicketView(
-                        title: vignettes[i].vignetteType.first ?? "",
-                        price: "\(Int(vignettes[i].sum)) Ft")
-                    .roundedCorners(
-                            radius: 8,
-                            strokeColor: isSelected ?
-                            Assets.Colors.primaryBlue ?? .clear :
-                                Assets.Colors.backgroundGrey ?? .clear)
+                    vignetteView(for: vignettes[i])
                     .onTapGesture {
                         selectedVignette = vignettes[i]
                     }
                 }
-                RoundedButton(content: {
-                    Text("Vásárlás")
-                        .frame(maxWidth: .infinity)
-                }, action: {
-                    purchaseAction()
-                })
+                bottomButton
             }
             .background(Color.white)
             .cornerRadius(8)
             .frame(maxWidth: .infinity, alignment: .leading)
         }
+    }
+
+    private func vignetteView(for vignette: VignetteInformationHighwayVignette) -> some View {
+        let isSelected = selectedVignette?.vignetteType == vignette.vignetteType
+        return CountryWideTicketView(
+            title: vignette.vignetteType.first ?? "",
+            price: "\(Int(vignette.sum)) Ft")
+        .roundedCorners(
+            radius: 8,
+            strokeColor: isSelected ? .Yettel.primaryBlue : .Yettel.backgroundGrey)
+    }
+
+    private var bottomButton: some View {
+        RoundedButton(content: {
+            Text("Vásárlás")
+                .frame(maxWidth: .infinity)
+        }, action: {
+            purchaseAction()
+        })
     }
 }
 

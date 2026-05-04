@@ -1,11 +1,3 @@
-//
-//  CountryWideTicketView.swift
-//  YettelStickers
-//
-//  Created by Tamás Keller on 2026. 04. 29..
-//
-
-
 import SwiftUI
 
 struct CountryWideTicketView: View {
@@ -21,10 +13,10 @@ struct CountryWideTicketView: View {
     var body: some View {
         HStack{
             Text(title)
-                .foregroundColor(Assets.Colors.primaryBlue)
+                .foregroundColor(.Yettel.primaryBlue)
             Spacer()
             Text(price)
-                .foregroundColor(Assets.Colors.primaryBlue)
+                .foregroundColor(.Yettel.primaryBlue)
         }
         .padding()
         .contentShape(Rectangle())

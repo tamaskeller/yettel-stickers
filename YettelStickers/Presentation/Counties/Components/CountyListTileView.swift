@@ -1,10 +1,3 @@
-//
-//  CountyListTileView.swift
-//  YettelStickers
-//
-//  Created by Tamás Keller on 2026. 05. 03..
-//
-
 import SwiftUI
 
 struct CountyListTileView: View {
@@ -25,12 +18,13 @@ struct CountyListTileView: View {
             image
                 .padding(.trailing, 12)
             Text(title)
-                .foregroundColor(isSelected ? Assets.Colors.textGrey : Assets.Colors.primaryBlue)
+                .foregroundColor(isSelected ? .Yettel.textGrey : .Yettel.primaryBlue)
             Spacer()
             Text(price)
-                .foregroundColor(Assets.Colors.primaryBlue)
+                .foregroundColor(.Yettel.primaryBlue)
         }
         .padding()
+        .frame(height: 24)
         .contentShape(Rectangle())
     }
 }

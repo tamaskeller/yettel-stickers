@@ -14,8 +14,8 @@ final class ConfirmationViewModel: ConfirmationViewModelProtocol {
     init(selectionIdentifiers: Set<String>,
          vignetteInformation: VignetteInformationResponse,
          repository: HighwayRepositoryProtocol) {
-        self.vignetteInformation = vignetteInformation
-            self.repository = repository
             self.selectionIdenfitiers = selectionIdentifiers
+            self.vignetteInformation = vignetteInformation
+            self.repository = repository
     }
 }

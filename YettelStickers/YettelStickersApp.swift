@@ -7,6 +7,7 @@ struct YettelStickersApp: App {
     @StateObject private var coordinator = AppCoordinator()
 
     init() {
+        customizeAppearance()
     }
 
     var body: some Scene {
@@ -32,6 +33,24 @@ struct YettelStickersApp: App {
                     }
             }
         }
+    }
+
+    private func customizeAppearance() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor(.Yettel.lime)
+
+        appearance.titleTextAttributes = [
+            .foregroundColor: UIColor(.Yettel.primaryBlue)
+        ]
+        appearance.largeTitleTextAttributes = [
+            .foregroundColor: UIColor(.Yettel.primaryBlue)
+        ]
+
+        let navBar = UINavigationBar.appearance()
+        navBar.standardAppearance = appearance
+        navBar.scrollEdgeAppearance = appearance
+        navBar.compactAppearance = appearance
     }
 
 //    private func testAF() async {

@@ -1,10 +1,3 @@
-//
-//  AppCoordinator.swift
-//  YettelStickers
-//
-//  Created by Tamás Keller on 2026. 05. 03..
-//
-
 import SwiftUI
 
 @MainActor
@@ -16,7 +9,8 @@ class AppCoordinator: ObservableObject {
     }
 
     func pushConfirmation(selection: Set<String>, response: VignetteInformationResponse) {
-        path.append(AppRoute.confirmation(selectionIdentifiers: selection, vignetteInfo: response))
+        path.append(AppRoute.confirmation(selectionIdentifiers: selection,
+                                          vignetteInfo: response))
     }
 
     func goBack() {
