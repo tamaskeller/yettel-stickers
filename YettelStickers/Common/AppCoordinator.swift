@@ -9,7 +9,8 @@ class AppCoordinator: ObservableObject {
     }
 
     func pushConfirmation(selection: Set<String>, response: VignetteInformationResponse) {
-        path.append(AppRoute.confirmation(selectionIdentifiers: selection, vignetteInfo: response))
+        path.append(AppRoute.confirmation(selectionIdentifiers: selection,
+                                          vignetteInfo: response))
     }
 
     func goBack() {

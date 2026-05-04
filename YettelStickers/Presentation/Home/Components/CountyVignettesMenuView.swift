@@ -1,10 +1,3 @@
-//
-//  CountyVignettesMenuView.swift
-//  YettelStickers
-//
-//  Created by Tamás Keller on 2026. 04. 29..
-//
-
 import SwiftUI
 
 struct CountyVignettesMenuView: View {

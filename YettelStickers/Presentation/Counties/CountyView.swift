@@ -35,6 +35,8 @@ struct CountyView: View {
                     selection: viewModel.getCurrentOrder(),
                     response: viewModel.currentState)
             }
+            .opacity(viewModel.selectedCounties.isEmpty ? 0.5 : 1)
+            .disabled(viewModel.selectedCounties.isEmpty)
         }
         .padding()
         .frame(alignment: .leading)

@@ -53,8 +53,6 @@ struct YettelStickersApp: App {
         navBar.compactAppearance = appearance
     }
 
-
-
 //    private func testAF() async {
 //        async let response1 = await AF.request("http://0.0.0.0:8080/v1/highway/info", method: .get).serializingDecodable(VignetteInformationResponse.self).response
 //        async let response2 = await AF.request("http://0.0.0.0:8080/v1/highway/vehicle", method: .get).serializingDecodable(VehicleInformationResponse.self).response

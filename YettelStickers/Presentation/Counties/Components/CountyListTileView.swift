@@ -1,10 +1,3 @@
-//
-//  CountyListTileView.swift
-//  YettelStickers
-//
-//  Created by Tamás Keller on 2026. 05. 03..
-//
-
 import SwiftUI
 
 struct CountyListTileView: View {
