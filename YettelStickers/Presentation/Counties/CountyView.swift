@@ -14,7 +14,9 @@ struct CountyView: View {
             ScrollView() {
                 Text("Éves vármegyei matricák")
                 VStack(spacing: 16) {
-                    Assets.Images.countyGroupPreset.renderingMode(.original)
+                    CountyMap(
+                        countyIdentifiers: viewModel.presentationData.counties.map({ $0.id }),
+                        selectedCountyIdentifiers: viewModel.selectedCounties.map{ $0.id })
                     let counties = viewModel.presentationData.counties
                     ForEach(counties, id: \.self) { county in
                         let isSelected = viewModel.selectedCounties.contains(county)
