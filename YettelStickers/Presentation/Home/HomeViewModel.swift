@@ -27,7 +27,7 @@ final class HomeViewModel: HomeViewModelProtocol {
                 vehicleInformation = vehicle
                 vignetteInformation = vignettes
                 selectedVignette = vignettes.payload.highwayVignettes.first
-                debugPrint(vignettes)
+                //debugPrint(vignettes)
             }
         }
     }

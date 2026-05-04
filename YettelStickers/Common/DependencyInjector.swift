@@ -12,8 +12,15 @@ public final class DependencyInjector {
         return resolved
     }
 
-    public func resolve<T, Arg>(_ type: T.Type, argument: Arg) -> T {
+    public func resolve<T, Arg1>(_ type: T.Type, _ argument: Arg1) -> T {
         guard let resolved = container.resolve(type, argument: argument) else {
+            fatalError("Failed to resolve type \(type)")
+        }
+        return resolved
+    }
+
+    public func resolve<T, Arg1, Arg2>(_ type: T.Type, _ argument1: Arg1, _ argument2: Arg2) -> T {
+        guard let resolved = container.resolve(type, arguments: argument1, argument2) else {
             fatalError("Failed to resolve type \(type)")
         }
         return resolved
@@ -38,19 +45,19 @@ public final class DependencyInjector {
     }
 
     private func registerViewModels() {
-        container.register((any HomeViewModelProtocol).self) { [unowned self] _ in
+        container.register((any HomeViewModelProtocol).self) {
+            [unowned self] _ in
             HomeViewModel(
                 repository: resolve(HighwayRepositoryProtocol.self))
         }
-        container.register((any CountyViewModelProtocol).self) { [unowned self] (_, counties: [VignetteInformationCounty]) in
-            CountyViewModel(
-                counties: counties,
+        container.register((any CountyViewModelProtocol).self) {
+            [unowned self] (_, currentState) in
+            CountyViewModel(currentState: currentState,
                 repository: resolve(HighwayRepositoryProtocol.self))
         }
-        container.register((any ConfirmationViewModelProtocol).self) { [unowned self] (_, preorder: [HighwayTicketPreorder]) in
-            ConfirmationViewModel(
-                preorderData: preorder,
-                repository: resolve(HighwayRepositoryProtocol.self))
+        container.register((any ConfirmationViewModelProtocol).self) {
+            [unowned self] (_, selections, vignettes) in
+            ConfirmationViewModel(selectionIdentifiers: selections, vignetteInformation: vignettes, repository: resolve(HighwayRepositoryProtocol.self))
         }
     }
 }
