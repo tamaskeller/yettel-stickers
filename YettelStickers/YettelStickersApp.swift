@@ -7,6 +7,7 @@ struct YettelStickersApp: App {
     @StateObject private var coordinator = AppCoordinator()
 
     init() {
+        customizeAppearance()
     }
 
     var body: some Scene {
@@ -33,6 +34,26 @@ struct YettelStickersApp: App {
             }
         }
     }
+
+    private func customizeAppearance() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor(Assets.Colors.lime ?? .green)
+
+        appearance.titleTextAttributes = [
+            .foregroundColor: UIColor(Assets.Colors.primaryBlue ?? .blue)
+        ]
+        appearance.largeTitleTextAttributes = [
+            .foregroundColor: UIColor(Assets.Colors.primaryBlue ?? .blue)
+        ]
+
+        let navBar = UINavigationBar.appearance()
+        navBar.standardAppearance = appearance
+        navBar.scrollEdgeAppearance = appearance
+        navBar.compactAppearance = appearance
+    }
+
+
 
 //    private func testAF() async {
 //        async let response1 = await AF.request("http://0.0.0.0:8080/v1/highway/info", method: .get).serializingDecodable(VignetteInformationResponse.self).response

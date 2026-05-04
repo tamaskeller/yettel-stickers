@@ -31,6 +31,7 @@ struct CountyListTileView: View {
                 .foregroundColor(Assets.Colors.primaryBlue)
         }
         .padding()
+        .frame(height: 24)
         .contentShape(Rectangle())
     }
 }

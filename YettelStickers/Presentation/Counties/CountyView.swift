@@ -13,7 +13,7 @@ struct CountyView: View {
         VStack {
             ScrollView() {
                 Text("Éves vármegyei matricák")
-                VStack {
+                VStack(spacing: 16) {
                     Assets.Images.countyGroupPreset.renderingMode(.original)
                     let counties = viewModel.currentState.payload.counties
                     ForEach(counties, id: \.self) { county in
@@ -24,6 +24,7 @@ struct CountyView: View {
                                 viewModel.toggle(county)
                             }
                     }
+                    Divider()
                 }
             }
 

@@ -15,6 +15,7 @@ struct HomeView: View {
         .onAppear {
             viewModel.onAppear()
         }
+        .navigationTitle("STICKERS!")
     }
 
     private var contentView: some View {
@@ -37,7 +38,8 @@ struct HomeView: View {
                     coordinator.pushCounties(vignetteInfo: vignettes)
                 }
             }
-        }.padding(.horizontal)
+        }
+        .padding(.horizontal)
     }
 }
 
