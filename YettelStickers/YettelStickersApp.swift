@@ -1,5 +1,4 @@
 import SwiftUI
-import Alamofire
 
 @main
 struct YettelStickersApp: App {

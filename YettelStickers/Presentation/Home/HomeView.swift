@@ -21,26 +21,39 @@ struct HomeView: View {
     @ViewBuilder
     private var contentView: some View {
         if let presentationData = viewModel.presentationData {
-            VStack {
-                let plateNumber = presentationData.vehicleData.vehiclePlateNumber
-                let ownerName = presentationData.vehicleData.vehicleOwnerName
-                VehicleCardView(licensePlateNumber: plateNumber, ownerName: ownerName)
+            ZStack {
+                VStack {
+                    let plateNumber = presentationData.vehicleData.vehiclePlateNumber
+                    let ownerName = presentationData.vehicleData.vehicleOwnerName
+                    VehicleCardView(licensePlateNumber: plateNumber, ownerName: ownerName)
 
-                if let vignettes = viewModel.presentationData?.vignetteData {
-                    CountryWideVignettesListView(
-                        vignettes: vignettes.values.filter {
-                            $0.isSingular
-                        },
-                        purchaseAction: {
+                    if let vignettes = viewModel.presentationData?.vignetteData {
+                        CountryWideVignettesListView(
+                            vignettes: vignettes.values.filter {
+                                $0.isSingular
+                            },
+                            purchaseAction: {
+                                coordinator.pushCounties(vignetteInfo: presentationData)
+                            },
+                            selectedVignetteIdentifier: $viewModel.selectedVignetteIdentifier)
+                        CountyVignettesMenuView {
                             coordinator.pushCounties(vignetteInfo: presentationData)
-                        },
-                        selectedVignette: $viewModel.selectedVignette)
-                    CountyVignettesMenuView {
-                        coordinator.pushCounties(vignetteInfo: presentationData)
+                        }
                     }
                 }
+                .padding(.horizontal)
+                .padding(.vertical, 12)
+
+                if viewModel.isLoading {
+                    Color.black.opacity(0.25)
+                        .ignoresSafeArea()
+
+                    ProgressView()
+                        .padding()
+                        .background(Color(.systemBackground))
+                        .cornerRadius(12)
+                }
             }
-            .padding(.horizontal)
         }
     }
 }

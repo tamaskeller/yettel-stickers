@@ -5,7 +5,7 @@ struct CountryWideVignettesListView: View {
     let vignettes: [VignettePresentationVignetteData]
     let purchaseAction: () -> Void
 
-    @Binding var selectedVignette: VignettePresentationVignetteData?
+    @Binding var selectedVignetteIdentifier: String?
 
     var body: some View {
         RoundedCardView {
@@ -13,7 +13,7 @@ struct CountryWideVignettesListView: View {
                 ForEach(0..<vignettes.count, id: \.self) { i in
                     vignetteView(for: vignettes[i])
                     .onTapGesture {
-                        selectedVignette = vignettes[i]
+                        selectedVignetteIdentifier = vignettes[i].vignetteType
                     }
                 }
                 bottomButton
@@ -25,7 +25,7 @@ struct CountryWideVignettesListView: View {
     }
 
     private func vignetteView(for vignette: VignettePresentationVignetteData) -> some View {
-        let isSelected = selectedVignette?.vignetteType == vignette.vignetteType
+        let isSelected = selectedVignetteIdentifier == vignette.vignetteType
         return CountryWideTicketView(
             title: vignette.vignetteType,
             price: "\(Int(vignette.sum)) Ft")
@@ -45,5 +45,5 @@ struct CountryWideVignettesListView: View {
 }
 
 #Preview {
-    CountryWideVignettesListView(vignettes: [], purchaseAction: {}, selectedVignette: .constant(nil))
+    CountryWideVignettesListView(vignettes: [], purchaseAction: {}, selectedVignetteIdentifier: .constant(nil))
 }
