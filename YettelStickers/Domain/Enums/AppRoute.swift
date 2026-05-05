@@ -4,4 +4,5 @@ enum AppRoute: Hashable {
     case home
     case counties(vignetteInfo: VignettePresentationData)
     case confirmation(selectionIdentifiers: Set<String>, vignetteInfo: VignettePresentationData)
+    case success
 }

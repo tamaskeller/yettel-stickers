@@ -1,10 +1,17 @@
 import SwiftUI
 
+enum RoundedButtonStyle {
+    case primary
+    case secondary
+}
+
 struct RoundedButton<Content: View>: View {
+    private let style: RoundedButtonStyle
     private let content: Content
     private let action: () -> Void
 
-    init(@ViewBuilder content: () -> Content, action: @escaping () -> Void) {
+    init(style: RoundedButtonStyle = .primary, @ViewBuilder content: () -> Content, action: @escaping () -> Void) {
+        self.style = style
         self.content = content()
         self.action = action
     }
@@ -16,11 +23,11 @@ struct RoundedButton<Content: View>: View {
             content
         }
         .padding(.horizontal)
-        .foregroundStyle(.white)
+        .foregroundStyle(style == .primary ? .white : Color.Yettel.primaryBlue)
         .frame(height: 48)
         .frame(maxWidth: .infinity)
-        .background(Color.Yettel.primaryBlue)
-        .cornerRadius(24)
+        .background(style == .primary ? Color.Yettel.primaryBlue : Color.white)
+        .roundedCorners(radius: 24, strokeColor: .Yettel.primaryBlue, lineWidth: 1)
     }
 }
 

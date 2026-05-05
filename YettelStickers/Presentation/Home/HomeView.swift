@@ -33,7 +33,8 @@ struct HomeView: View {
                                 $0.isSingular
                             },
                             purchaseAction: {
-                                coordinator.pushCounties(vignetteInfo: presentationData)
+                                coordinator.pushConfirmation(selection: Set([viewModel.selectedVignetteIdentifier!]),
+                                                             response: viewModel.presentationData!)
                             },
                             selectedVignetteIdentifier: $viewModel.selectedVignetteIdentifier)
                         CountyVignettesMenuView {

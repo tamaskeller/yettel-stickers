@@ -28,6 +28,9 @@ struct YettelStickersApp: App {
                                 viewModel:
                                     DependencyInjector.shared.resolve((any ConfirmationViewModelProtocol).self, selectionInfo, vignetteInfo) as! ConfirmationViewModel)
                                 .environmentObject(coordinator)
+                        case .success:
+                            SuccessView()
+                                .environmentObject(coordinator)
                         }
                     }
             }
