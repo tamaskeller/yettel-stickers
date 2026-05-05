@@ -2,6 +2,7 @@ import SwiftUI
 
 protocol HomeViewModelProtocol: ObservableObject {
     var presentationData: VignettePresentationData? { get }
+    var fetchError: ErrorWrapper? { get }
     var isLoading: Bool { get }
     func onAppear()
 }
@@ -9,10 +10,11 @@ protocol HomeViewModelProtocol: ObservableObject {
 final class HomeViewModel: HomeViewModelProtocol {
 
     let repository: HighwayRepositoryProtocol
-    var isLoading: Bool = false
 
     @Published var presentationData: VignettePresentationData?
     @Published var selectedVignetteIdentifier: String?
+    @Published var isLoading: Bool = false
+    @Published var fetchError: ErrorWrapper?
 
     init(repository: HighwayRepositoryProtocol) {
         self.repository = repository
@@ -23,19 +25,24 @@ final class HomeViewModel: HomeViewModelProtocol {
         Task {
             async let vignetteResponse = repository.getVignetteInformation()
             async let vehicleResponse = repository.getVehicleInformation()
-            let (vignettes, vehicle) = try await (vignetteResponse, vehicleResponse)
-            await MainActor.run {
+            do {
+                let (vignettes, vehicle) = try await (vignetteResponse, vehicleResponse)
                 let counties = vignettes.payload.counties.map {
                     VignettePresentationCountyData(id: $0.id, name: $0.name)
                 }
                 let vehicleData = VignettePresentationVehicleData(
                     vehicleOwnerName: vehicle.name,
                     vehiclePlateNumber: vehicle.plate)
-
                 let vignetteData = makeVignetteDictionary(from: vignettes.payload.highwayVignettes)
-                presentationData = .init(counties: counties, vehicleData: vehicleData, vignetteData: vignetteData)
-                selectedVignetteIdentifier = defaultVignetteType(from: vignettes.payload.highwayVignettes)
-                isLoading = false
+                await MainActor.run {
+                    presentationData = .init(counties: counties, vehicleData: vehicleData, vignetteData: vignetteData)
+                    selectedVignetteIdentifier = defaultVignetteType(from: vignettes.payload.highwayVignettes)
+                    isLoading = false
+                }
+            } catch let error {
+                await MainActor.run {
+                    fetchError = ErrorWrapper(message: error.localizedDescription)
+                }
             }
         }
     }
@@ -50,6 +57,7 @@ final class HomeViewModel: HomeViewModelProtocol {
                     type,
                     VignettePresentationVignetteData(
                         vignetteType: type,
+                        vehicleCategory: item.vehicleCategory,
                         cost: item.cost,
                         trxFee: item.trxFee,
                         sum: item.sum,

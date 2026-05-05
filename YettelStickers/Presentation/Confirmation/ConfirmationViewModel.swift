@@ -3,6 +3,10 @@ import SwiftUI
 protocol ConfirmationViewModelProtocol: ObservableObject {
     var vignetteInformation: VignettePresentationData { get }
     var selectionIdenfitiers: Set<String> { get }
+    var orderResponse: VignetteOrderResponse? { get }
+    var orderError: ErrorWrapper? { get }
+    var isLoading: Bool { get }
+    func confirmPurchase()
     func getSelectedVignetteTypeName() -> String
     func getSelectedVignetteTypes() -> [VignettePresentationVignetteData]
     func getVignetteItemName(for identifier: String) -> String
@@ -15,6 +19,9 @@ final class ConfirmationViewModel: ConfirmationViewModelProtocol {
 
     @Published var selectionIdenfitiers: Set<String>
     @Published var vignetteInformation: VignettePresentationData
+    @Published var orderResponse: VignetteOrderResponse?
+    @Published var orderError: ErrorWrapper?
+    @Published var isLoading: Bool = false
     let repository: HighwayRepositoryProtocol
 
     init(selectionIdentifiers: Set<String>,
@@ -23,6 +30,31 @@ final class ConfirmationViewModel: ConfirmationViewModelProtocol {
             self.selectionIdenfitiers = selectionIdentifiers
             self.vignetteInformation = vignetteInformation
             self.repository = repository
+    }
+
+    func confirmPurchase() {
+        isLoading = true
+        let orders = getSelectedVignetteTypes().map({
+            VignetteOrderRequestDataItem(
+                type: $0.vignetteType,
+                category: $0.vehicleCategory,
+                cost: $0.sum)
+        })
+
+        let orderRequest = VignetteOrderRequestData(highwayOrders: orders)
+        Task {
+            do {
+                let answer = try await repository.orderVignettes(from: orderRequest)
+                await MainActor.run {
+                    orderResponse = answer
+                }
+            } catch let error {
+                await MainActor.run {
+                    orderError = ErrorWrapper(message: error.localizedDescription)
+                }
+            }
+            isLoading = false
+        }
     }
 
     func getSelectedVignetteTypeName() -> String {
@@ -61,6 +93,8 @@ final class ConfirmationViewModel: ConfirmationViewModelProtocol {
     func getTotalPriceText() -> String {
         return "\(Int(getTotalPrice())) Ft"
     }
+
+    // MARK: - Private
 
     private func getVignetteItemBasePrice(for identifier: String) -> Float {
         return vignetteInformation.vignetteData[identifier]?.cost ?? 0

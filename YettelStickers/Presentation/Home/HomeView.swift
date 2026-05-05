@@ -16,6 +16,13 @@ struct HomeView: View {
             viewModel.onAppear()
         }
         .navigationTitle("STICKERS!")
+        .alert(item: $viewModel.fetchError) { error in
+            Alert(
+                title: Text("Error"),
+                message: Text(error.message),
+                dismissButton: .default(Text("OK"))
+            )
+        }
     }
 
     @ViewBuilder
@@ -46,13 +53,7 @@ struct HomeView: View {
                 .padding(.vertical, 12)
 
                 if viewModel.isLoading {
-                    Color.black.opacity(0.25)
-                        .ignoresSafeArea()
-
-                    ProgressView()
-                        .padding()
-                        .background(Color(.systemBackground))
-                        .cornerRadius(12)
+                    LoadingView()
                 }
             }
         }

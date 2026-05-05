@@ -19,6 +19,9 @@ final class HighwayNetworkService: HighwayNetworkServiceProtocol {
     }
 
     private func request(for endpoint: Endpoint) async throws -> DataRequest {
-        AF.request(baseUrl + endpoint.path, method: endpoint.method)
+        AF.request(baseUrl + endpoint.path,
+                   method: endpoint.method,
+                   parameters: endpoint.parameters,
+                   encoding: JSONEncoding.default)
     }
 }
