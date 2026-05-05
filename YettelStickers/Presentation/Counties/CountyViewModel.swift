@@ -11,8 +11,12 @@ final class CountyViewModel: CountyViewModelProtocol {
     @Published var presentationData: VignettePresentationData
     @Published var selectedCounties: Set<VignettePresentationCountyData> = []
 
+    private let countyGraph = Graph<String>()
+
     init(presentationData: VignettePresentationData, repository: HighwayRepositoryProtocol) {
         self.presentationData = presentationData
+
+        createGraph()
     }
 
     func toggle(_ item: VignettePresentationCountyData) {
@@ -33,5 +37,10 @@ final class CountyViewModel: CountyViewModelProtocol {
 
     func getCurrentOrder() -> Set<String> {
         Set(selectedCounties.map({ $0.id }))
+    }
+
+    private func createGraph() {
+        presentationData.counties.forEach { countyGraph.addNode($0.id) }
+        // TODO: Create the graph neighbourhood. Later use it to determine if a selected county is isolated from the rest
     }
 }
