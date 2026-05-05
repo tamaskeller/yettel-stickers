@@ -13,17 +13,27 @@ struct ConfirmationView: View {
         VStack {
             ScrollView() {
                 Text("Vásárlás megerősítése")
+                    .foregroundStyle(Color.Yettel.primaryBlue)
                 ScrollView {
-                    VStack {
+                    VStack(spacing: 10) {
                         Divider()
                         ConfirmationViewTopRow(
                             leadingText: "Rendszám",
-                            trailingText: viewModel.vignetteInformation.vehicleData.vehiclePlateNumber)
+                            trailingText: viewModel.vignetteInformation.vehicleData.vehiclePlateNumber.uppercased())
                         ConfirmationViewTopRow(
                             leadingText: "Matrica típusa",
-                            trailingText: "Típus xy")
+                            trailingText: viewModel.getSelectedVignetteTypeName())
                         Divider()
-
+                        ForEach(viewModel.getSelectedVignetteTypes(), id: \.self) { vignetteType in
+                            ConfirmationViewItemRow(
+                                leadingText: viewModel.getVignetteItemName(for: vignetteType.vignetteType),
+                                trailingText: viewModel.getVignetteItemBasePriceText(for: vignetteType.vignetteType))
+                        }
+                        ConfirmationViewTopRow(
+                            leadingText: "Rendszerhasználati díj",
+                            trailingText: viewModel.getTransactionFeeText())
+                        Divider()
+                        PaymentTotalView(totalPriceText: viewModel.getTotalPriceText())
                     }
                 }
             }

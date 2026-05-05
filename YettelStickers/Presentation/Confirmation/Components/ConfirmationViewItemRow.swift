@@ -6,8 +6,12 @@ struct ConfirmationViewItemRow: View {
     let trailingText: String
 
     var body: some View {
-        Text(leadingText)
-        Spacer()
-        Text(trailingText)
+        HStack {
+            Text(leadingText)
+                .font(.system(size: 16, weight: .bold))
+            Spacer()
+            Text(trailingText)
+        }
+        .foregroundStyle(Color.Yettel.primaryBlue)
     }
 }
