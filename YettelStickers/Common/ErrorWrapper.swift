@@ -1,6 +1,6 @@
 import Foundation
 
-struct ErrorWrapper: Identifiable {
-    let id = UUID()
-    let message: String
+public struct ErrorWrapper: Identifiable {
+    public let id = UUID()
+    public let message: String
 }

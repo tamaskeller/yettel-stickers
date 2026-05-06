@@ -51,7 +51,9 @@ struct ConfirmationView: View {
                 RoundedButton(style: .primary, content: {
                     Text("Tovább")
                 }) {
-                    viewModel.confirmPurchase()
+                    Task{
+                        await viewModel.confirmPurchase()
+                    }
                 }
                 RoundedButton(style: .secondary, content: {
                     Text("Mégsem")
@@ -62,7 +64,7 @@ struct ConfirmationView: View {
             .padding()
             .frame(alignment: .leading)
             .frame(maxWidth: .infinity)
-            
+
             if viewModel.isLoading {
                 LoadingView()
             }

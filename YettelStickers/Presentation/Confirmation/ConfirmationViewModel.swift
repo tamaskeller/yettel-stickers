@@ -1,12 +1,12 @@
 import SwiftUI
 
-protocol ConfirmationViewModelProtocol: ObservableObject {
+public protocol ConfirmationViewModelProtocol: ObservableObject {
     var vignetteInformation: VignettePresentationData { get }
     var selectionIdenfitiers: Set<String> { get }
     var orderResponse: VignetteOrderResponse? { get }
     var orderError: ErrorWrapper? { get }
     var isLoading: Bool { get }
-    func confirmPurchase()
+    func confirmPurchase() async
     func getSelectedVignetteTypeName() -> String
     func getSelectedVignetteTypes() -> [VignettePresentationVignetteData]
     func getVignetteItemName(for identifier: String) -> String
@@ -15,16 +15,16 @@ protocol ConfirmationViewModelProtocol: ObservableObject {
     func getTotalPriceText() -> String
 }
 
-final class ConfirmationViewModel: ConfirmationViewModelProtocol {
+public final class ConfirmationViewModel: ConfirmationViewModelProtocol {
 
-    @Published var selectionIdenfitiers: Set<String>
-    @Published var vignetteInformation: VignettePresentationData
-    @Published var orderResponse: VignetteOrderResponse?
-    @Published var orderError: ErrorWrapper?
-    @Published var isLoading: Bool = false
+    @Published public var selectionIdenfitiers: Set<String>
+    @Published public var vignetteInformation: VignettePresentationData
+    @Published public var orderResponse: VignetteOrderResponse?
+    @Published public var orderError: ErrorWrapper?
+    @Published public var isLoading: Bool = false
     let repository: HighwayRepositoryProtocol
 
-    init(selectionIdentifiers: Set<String>,
+    public init(selectionIdentifiers: Set<String>,
          vignetteInformation: VignettePresentationData,
          repository: HighwayRepositoryProtocol) {
             self.selectionIdenfitiers = selectionIdentifiers
@@ -32,32 +32,42 @@ final class ConfirmationViewModel: ConfirmationViewModelProtocol {
             self.repository = repository
     }
 
-    func confirmPurchase() {
-        isLoading = true
-        let orders = getSelectedVignetteTypes().map({
-            VignetteOrderRequestDataItem(
-                type: $0.vignetteType,
-                category: $0.vehicleCategory,
-                cost: $0.sum)
-        })
+    public func confirmPurchase() async {
+        await MainActor.run {
+                isLoading = true
+                orderError = nil
+                orderResponse = nil
+            }
 
-        let orderRequest = VignetteOrderRequestData(highwayOrders: orders)
-        Task {
-            do {
-                let answer = try await repository.orderVignettes(from: orderRequest)
-                await MainActor.run {
-                    orderResponse = answer
+            defer {
+                Task { @MainActor in
+                    isLoading = false
                 }
-            } catch let error {
+            }
+
+            let orders = getSelectedVignetteTypes().map {
+                VignetteOrderRequestDataItem(
+                    type: $0.vignetteType,
+                    category: $0.vehicleCategory,
+                    cost: $0.sum
+                )
+            }
+
+            let orderRequest = VignetteOrderRequestData(highwayOrders: orders)
+
+            do {
+                let response = try await repository.orderVignettes(from: orderRequest)
+                await MainActor.run {
+                    orderResponse = response
+                }
+            } catch {
                 await MainActor.run {
                     orderError = ErrorWrapper(message: error.localizedDescription)
                 }
             }
-            isLoading = false
-        }
     }
 
-    func getSelectedVignetteTypeName() -> String {
+    public func getSelectedVignetteTypeName() -> String {
         let selectedVignetteTypes = getSelectedVignetteTypes()
         if let firstItem = selectedVignetteTypes.first, firstItem.isSingular {
             return VignetteTypeName(rawValue: firstItem.vignetteType)?.displayName ?? ""
@@ -65,14 +75,14 @@ final class ConfirmationViewModel: ConfirmationViewModelProtocol {
         return VignetteTypeName.county.displayName
     }
 
-    func getSelectedVignetteTypes() -> [VignettePresentationVignetteData] {
+    public func getSelectedVignetteTypes() -> [VignettePresentationVignetteData] {
         let selectedVignetteTypes = Array(vignetteInformation.vignetteData.filter({
             selectionIdenfitiers.contains($0.key)
         }).values)
         return selectedVignetteTypes
     }
 
-    func getVignetteItemName(for identifier: String) -> String {
+    public func getVignetteItemName(for identifier: String) -> String {
         if let singularName = VignetteTypeName(rawValue: identifier) {
             return singularName.displayName
         } else {
@@ -82,15 +92,15 @@ final class ConfirmationViewModel: ConfirmationViewModelProtocol {
         }
     }
 
-    func getVignetteItemBasePriceText(for identifier: String) -> String {
+    public func getVignetteItemBasePriceText(for identifier: String) -> String {
         return "\(Int(getVignetteItemBasePrice(for: identifier))) Ft"
     }
 
-    func getTransactionFeeText() -> String {
+    public func getTransactionFeeText() -> String {
         return "\(Int(getTransactionFee())) Ft"
     }
 
-    func getTotalPriceText() -> String {
+    public func getTotalPriceText() -> String {
         return "\(Int(getTotalPrice())) Ft"
     }
 
