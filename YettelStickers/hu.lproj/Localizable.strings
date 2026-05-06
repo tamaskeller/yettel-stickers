@@ -1,0 +1,20 @@
+"button_purchase" = "Vásárlás";
+"button_continue" = "Tovább";
+"button_cancel" = "Mégsem";
+"button_ok" = "Rendben";
+
+"title_home" = "Stickers!";
+"title_confirmation" = "Vásárlás megerősítése";
+"title_counties" = "Éves vármegyei matricák";
+
+"label_plate_number" = "Rendszám";
+"label_transaction_fee" = "Rendszerhasználati díj";
+"label_vignette_type" = "Matrica típusa";
+"label_vignette_day" = "Országos napi";
+"label_vignette_week" = "Országos heti";
+"label_vignette_month" = "Országos havi";
+"label_vignette_year" = "Országos évi";
+"label_vignette_county" = "Éves vármegyei";
+"label_total_price" = "Fizetendő összeg";
+
+"message_success" = "A matricákat\nsikeresen\nkifizetted!";

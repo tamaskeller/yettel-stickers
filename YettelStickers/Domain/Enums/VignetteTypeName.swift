@@ -8,15 +8,15 @@ enum VignetteTypeName: String {
     var displayName: String {
         switch self {
         case .day:
-            return "Országos napi"
+            return Texts.Raw.vignetteDay
         case .week:
-            return "Országos heti"
+            return Texts.Raw.vignetteWeek
         case .month:
-            return "Országos havi"
+            return Texts.Raw.vignetteMonth
         case .year:
-            return "Országos évi"
+            return Texts.Raw.vignetteYear
         case .county:
-            return "Éves vármegyei"
+            return Texts.Raw.vignetteCounty
         }
     }
 }

@@ -12,7 +12,7 @@ struct CountyView: View {
     private var content: some View {
         VStack {
             ScrollView() {
-                Text("Éves vármegyei matricák")
+                Texts.Counties.title
                 VStack(spacing: 16) {
                     CountyMap(
                         countyIdentifiers: viewModel.presentationData.counties.map({ $0.id }),
@@ -31,7 +31,7 @@ struct CountyView: View {
             }
 
             RoundedButton(content: {
-                Text("Vásárlás")
+                Texts.Global.buttonPurchase
             }) {
                 coordinator.pushConfirmation(
                     selection: viewModel.getCurrentOrder(),

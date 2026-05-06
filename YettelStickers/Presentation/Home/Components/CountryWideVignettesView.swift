@@ -27,7 +27,7 @@ struct CountryWideVignettesListView: View {
     private func vignetteView(for vignette: VignettePresentationVignetteData) -> some View {
         let isSelected = selectedVignetteIdentifier == vignette.vignetteType
         return CountryWideTicketView(
-            title: vignette.vignetteType,
+            title: VignetteTypeName(rawValue: vignette.vignetteType)?.displayName ?? "",
             price: "\(Int(vignette.sum)) Ft")
         .roundedCorners(
             radius: 8,
@@ -36,8 +36,7 @@ struct CountryWideVignettesListView: View {
 
     private var bottomButton: some View {
         RoundedButton(content: {
-            Text("Vásárlás")
-                .frame(maxWidth: .infinity)
+            Texts.Global.buttonPurchase
         }, action: {
             purchaseAction()
         })

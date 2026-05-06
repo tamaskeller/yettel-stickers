@@ -14,7 +14,7 @@ struct SuccessView: View {
             VStack {
                 Spacer()
                 HStack {
-                    Text("A matricákat\nsikeresen\nkifizetted!")
+                    Texts.Success.message
                         .font(.Yettel.regular(size: 40))
                         .foregroundStyle(Color.Yettel.primaryBlue)
                         .multilineTextAlignment(.leading)
@@ -25,7 +25,7 @@ struct SuccessView: View {
                     Images.successDude
                 }
                 RoundedButton {
-                    Text("Rendben")
+                    Texts.Global.buttonOk
                 } action: {
                     coordinator.reset()
                 }

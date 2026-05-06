@@ -15,7 +15,7 @@ struct HomeView: View {
         .onAppear {
             viewModel.onAppear()
         }
-        .navigationTitle("STICKERS!")
+        .navigationTitle(Texts.Home.title)
         .alert(item: $viewModel.fetchError) { error in
             Alert(
                 title: Text("Error"),

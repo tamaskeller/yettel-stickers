@@ -21,6 +21,7 @@ struct RoundedButton<Content: View>: View {
             action()
         }) {
             content
+                .frame(maxWidth: .infinity)
         }
         .padding(.horizontal)
         .foregroundStyle(style == .primary ? .white : Color.Yettel.primaryBlue)

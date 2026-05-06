@@ -7,7 +7,7 @@ struct PaymentTotalView: View {
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text("Fizetendő összeg")
+                Texts.Global.totalPrice
                 Text(totalPriceText)
             }
             Spacer()

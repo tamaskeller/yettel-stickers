@@ -23,16 +23,16 @@ struct ConfirmationView: View {
         ZStack {
             VStack {
                 ScrollView() {
-                    Text("Vásárlás megerősítése")
+                    Texts.Confirmation.title
                         .foregroundStyle(Color.Yettel.primaryBlue)
                     ScrollView {
                         VStack(spacing: 10) {
                             Divider()
                             ConfirmationViewTopRow(
-                                leadingText: "Rendszám",
+                                leadingText: Texts.Raw.plateNumber,
                                 trailingText: viewModel.vignetteInformation.vehicleData.vehiclePlateNumber.uppercased())
                             ConfirmationViewTopRow(
-                                leadingText: "Matrica típusa",
+                                leadingText: Texts.Raw.vignetteType,
                                 trailingText: viewModel.getSelectedVignetteTypeName())
                             Divider()
                             ForEach(viewModel.getSelectedVignetteTypes(), id: \.self) { vignetteType in
@@ -41,7 +41,7 @@ struct ConfirmationView: View {
                                     trailingText: viewModel.getVignetteItemBasePriceText(for: vignetteType.vignetteType))
                             }
                             ConfirmationViewTopRow(
-                                leadingText: "Rendszerhasználati díj",
+                                leadingText: Texts.Raw.transactionFee,
                                 trailingText: viewModel.getTransactionFeeText())
                             Divider()
                             PaymentTotalView(totalPriceText: viewModel.getTotalPriceText())
@@ -49,14 +49,14 @@ struct ConfirmationView: View {
                     }
                 }
                 RoundedButton(style: .primary, content: {
-                    Text("Tovább")
+                    Texts.Global.buttonContinue
                 }) {
                     Task{
                         await viewModel.confirmPurchase()
                     }
                 }
                 RoundedButton(style: .secondary, content: {
-                    Text("Mégsem")
+                    Texts.Global.buttonCancel
                 }) {
                     coordinator.reset()
                 }

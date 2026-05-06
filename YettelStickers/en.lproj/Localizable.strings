@@ -1,0 +1,20 @@
+"button_purchase" = "Purchase";
+"button_continue" = "Continue";
+"button_cancel" = "Cancel";
+"button_ok" = "Okay";
+
+"title_home" = "Stickers!";
+"title_confirmation" = "Confirm purchase";
+"title_counties" = "County-wide vignettes";
+
+"label_plate_number" = "Plate number";
+"label_transaction_fee" = "Transaction fee";
+"label_vignette_type" = "Vignette type";
+"label_vignette_day" = "All-around for a day";
+"label_vignette_week" = "All-around for a week";
+"label_vignette_month" = "All-around for a month";
+"label_vignette_year" = "All-around for a year";
+"label_vignette_county" = "County-wide for a year";
+"label_total_price" = "Price total";
+
+"message_success" = "Your purchase\nof vignettes\nwas successful!";
