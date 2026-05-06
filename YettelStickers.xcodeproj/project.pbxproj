@@ -58,11 +58,6 @@
 			path = YettelStickersTests;
 			sourceTree = "<group>";
 		};
-		F4A6FA222F980ED00075C580 /* YettelStickersUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = YettelStickersUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,7 +92,6 @@
 			children = (
 				F4A6FA092F980ECF0075C580 /* YettelStickers */,
 				F4A6FA182F980ED00075C580 /* YettelStickersTests */,
-				F4A6FA222F980ED00075C580 /* YettelStickersUITests */,
 				F4A6FA082F980ECF0075C580 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -174,9 +168,6 @@
 			);
 			dependencies = (
 				F4A6FA212F980ED00075C580 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				F4A6FA222F980ED00075C580 /* YettelStickersUITests */,
 			);
 			name = YettelStickersUITests;
 			packageProductDependencies = (
