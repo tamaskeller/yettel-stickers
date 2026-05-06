@@ -7,7 +7,7 @@ struct SuccessView: View {
         ZStack() {
             Color.Yettel.lime.ignoresSafeArea()
             VStack {
-                Assets.Images.successDrops
+                Images.successDrops
                     .ignoresSafeArea()
                 Spacer()
             }
@@ -15,14 +15,14 @@ struct SuccessView: View {
                 Spacer()
                 HStack {
                     Text("A matricákat\nsikeresen\nkifizetted!")
-                        .font(.system(size: 40))
+                        .font(.Yettel.regular(size: 40))
                         .foregroundStyle(Color.Yettel.primaryBlue)
                         .multilineTextAlignment(.leading)
                     Spacer()
                 }
                 HStack {
                     Spacer()
-                    Assets.Images.successDude
+                    Images.successDude
                 }
                 RoundedButton {
                     Text("Rendben")

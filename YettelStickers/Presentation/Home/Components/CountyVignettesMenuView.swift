@@ -13,7 +13,7 @@ struct CountyVignettesMenuView: View {
                     Text("Matricák")
                         .foregroundColor(.Yettel.primaryBlue)
                     Spacer()
-                    Assets.Images.chevronRight
+                    Images.chevronRight
                 }
             }
         }

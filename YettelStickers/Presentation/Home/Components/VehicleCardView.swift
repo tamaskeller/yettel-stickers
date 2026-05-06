@@ -12,7 +12,7 @@ struct VehicleCardView: View {
     var body: some View {
         RoundedCardView {
             HStack {
-                Assets.Images.iconCar.padding(.trailing, 8)
+                Images.iconCar.padding(.trailing, 8)
                 VStack(alignment: .leading) {
                     Text("\(licensePlateNumber.uppercased())")
                         .font(.caption)

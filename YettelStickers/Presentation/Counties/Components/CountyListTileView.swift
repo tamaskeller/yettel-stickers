@@ -14,7 +14,7 @@ struct CountyListTileView: View {
 
     var body: some View {
         HStack{
-            let image = isSelected ? Assets.Images.checkboxFilled : Assets.Images.checkboxEmpty
+            let image = isSelected ? Images.checkboxFilled : Images.checkboxEmpty
             image
                 .padding(.trailing, 12)
             Text(title)

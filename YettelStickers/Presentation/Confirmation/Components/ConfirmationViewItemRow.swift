@@ -8,7 +8,7 @@ struct ConfirmationViewItemRow: View {
     var body: some View {
         HStack {
             Text(leadingText)
-                .font(.system(size: 16, weight: .bold))
+                .font(.Yettel.bold(size: 16))
             Spacer()
             Text(trailingText)
         }
