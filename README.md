@@ -15,10 +15,8 @@
 ## TO-DO
 
 1. Error handling has room for improvement for different cases.
-2. Unit tests.
+2. More unit tests. (Coverage can never be enough).
 3. One of the harder tasks (county non-neighbourhood alert) need implementing. Basis for graph-based solution is included in the project.
-4. Folder cleanup so everything is in the right place.
 5. Constants (especially dimensional) need to be in their respective enums and/or utility classes.
-6. Strings should be localized and provided by a utility class.
-7. Alamofire was chosen as a lib to quicken work, own custom implementation would be preferred.
+7. Alamofire was chosen as a lib to quicken work, own custom implementation would be preferred for simple URLSession operations.
 8. The design has much room for improvement from the development side. Font types and sizes, better layout, etc.
